@@ -62,29 +62,56 @@ document.getElementById("myDate").innerHTML = month + "/" + date +"/" + year;
 
 // STEP 11: Record the start time using new Date().getTime()
 //          This gives you the current time in milliseconds.
-let timer = new Date();
 let running = true;
-let start = timer.getTime();
+let start = new Date().getTime();
 let button = document.getElementById("myBtn");
-button.addEventListener('click', function(){
+
+// Function to update timer
+function timer() {
+    let end = new Date().getTime();
+    let elapsed = (end - start) / 1000;
+    document.getElementById("myTimer").innerHTML = elapsed.toFixed(3);
+}
+
+// Start timer immediately
+let interval = setInterval(timer, 10);
+
+// Start/Stop button
+button.addEventListener('click', function() {
     if (running) {
         clearInterval(interval);
         button.innerHTML = "Start";
         running = false;
     } else {
-        start = new Date().getTime(); // Reset start time to 0 seconds elapsed
-        interval = setInterval(updateTimer, 10);
+        start = new Date().getTime();
+        interval = setInterval(timer, 10);
         button.innerHTML = "Stop";
         running = true;
-    };
-}
-function timer(){
-let end = new Date().getTime();
-let elapsed = (end-start)/1000
-document.getElementById("myTimer").innerHTML = elapsed.toFixed(3);
-};
-let interval = setInterval(timer, 10);
+    }
 });
+// let timer = new Date();
+// let running = true;
+// let start = timer.getTime();
+// let button = document.getElementById("myBtn");
+// button.addEventListener('click', function(){
+//     if (running) {
+//         clearInterval(interval);
+//         button.innerHTML = "Start";
+//         running = false;
+//     } else {
+//         start = new Date().getTime(); // Reset start time to 0 seconds elapsed
+//         interval = setInterval(updateTimer, 10);
+//         button.innerHTML = "Stop";
+//         running = true;
+//     };
+// }
+// function timer(){
+// let end = new Date().getTime();
+// let elapsed = (end-start)/1000
+// document.getElementById("myTimer").innerHTML = elapsed.toFixed(3);
+// };
+// let interval = setInterval(timer, 10);
+// });
 // STEP 12: Create a variable to hold the timer ID (for stopping later).
 //          Use setInterval() with a delay of 10 milliseconds.
 //          Inside the interval function:
